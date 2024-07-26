@@ -24,7 +24,7 @@ jobs:
           msbuild_cl_x86_release
         ]
         include:
-          - { build: msbuild_cl_x86_release, compiler: msbuild_cl, arch: x86, platform_sln: '\"Any CPU\"', platform_name: x86, build_config: Release }
+          - { build: msbuild_cl_x86_release, compiler: msbuild_cl, arch: x86, platform_sln: '"Any CPU"', platform_name: x86, build_config: Release }
 
     steps:
       - name: Checkout source
