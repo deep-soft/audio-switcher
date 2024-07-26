@@ -51,8 +51,9 @@ jobs:
 
       - name: Build (cl)
         working-directory: src
+        #  msbuild -m /property:Configuration=${{ matrix.build_config }} /property:Platform=${{ matrix.platform_sln }} AudioSwitcher.sln        
         run: |
-          msbuild -m /property:Configuration=${{ matrix.build_config }} /property:Platform=${{ matrix.platform_sln }} AudioSwitcher.sln
+          msbuild -m /property:Configuration=${{ matrix.build_config }} AudioSwitcher.sln
 
       - name: Sign Windows exe and dll files
         continue-on-error: true
