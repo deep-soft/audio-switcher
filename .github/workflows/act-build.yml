@@ -24,7 +24,7 @@ jobs:
           msbuild_cl_x86_release
         ]
         include:
-          - { build: msbuild_cl_x86_release, compiler: msbuild_cl, arch: x86, platform_sln: "Any CPU", platform_name: x86, build_config: Release }
+          - { build: msbuild_cl_x86_release, compiler: msbuild_cl, arch: x86, platform_sln: '\"Any CPU\"', platform_name: x86, build_config: Release }
 
     steps:
       - name: Checkout source
@@ -53,7 +53,7 @@ jobs:
         working-directory: src
         #  msbuild -m /property:Configuration=${{ matrix.build_config }} /property:Platform=${{ matrix.platform_sln }} AudioSwitcher.sln        
         run: |
-          msbuild -m /property:Configuration=${{ matrix.build_config }} AudioSwitcher.sln
+          msbuild -m /property:Configuration=${{ matrix.build_config }} /property:Platform=${{ matrix.platform_sln }} AudioSwitcher.sln        
 
       - name: Sign Windows exe and dll files
         continue-on-error: true
