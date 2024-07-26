@@ -56,6 +56,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.2.0
 
       - name: Restore NuGet packages
+        working-directory: src
         run:
           nuget restore AudioSwitcher.sln
 
