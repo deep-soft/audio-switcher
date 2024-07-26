@@ -16,7 +16,7 @@ env:
 jobs:
 #------------------------------------------------------------------------------
   build-msbuild:
-    runs-on: windows-2022
+    runs-on: windows-2019
     strategy:
       fail-fast: false
       matrix:
@@ -44,21 +44,21 @@ jobs:
           echo "Print program version"
           echo ${{ env.Prog_Version }}
 
-#      - name: Set MSVC environment
-#        uses: deep-soft/msvc-dev-cmd@v1
-#        with:
-#          arch: ${{ matrix.arch }}
+      - name: Set MSVC environment
+        uses: deep-soft/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch }}
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.3.1
+#      - name: Setup MSBuild
+#        uses: microsoft/setup-msbuild@v1.3.1
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.2.0
+#      - name: Setup NuGet
+#        uses: NuGet/setup-nuget@v1.2.0
 
-      - name: Restore NuGet packages
-        working-directory: src
-        run:
-          nuget restore AudioSwitcher.sln
+#      - name: Restore NuGet packages
+#        working-directory: src
+#        run:
+#          nuget restore AudioSwitcher.sln
 
       - name: Build (cl)
         working-directory: src
