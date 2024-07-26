@@ -16,6 +16,7 @@ env:
 jobs:
 #------------------------------------------------------------------------------
   build-msbuild:
+    name: build
     runs-on: windows-2019
     strategy:
       fail-fast: false
@@ -74,7 +75,7 @@ jobs:
           password: '${{ secrets.WINDOWS_PFX_PASSWORD }}'
           certificatesha1: '${{ secrets.WINDOWS_PFX_SHA1_THUMBPRINT }}'
           # certificatename: '${{ secrets.CERTNAME }}'
-          folder: 'release/${{ matrix.build_config }}'
+          folder: 'src/AudioSwitcher/bin/${{ matrix.build_config }}'
           recursive: true
 
       - name: Create Zip Archive Release
@@ -82,8 +83,8 @@ jobs:
         uses: deep-soft/zip-release@v2
         with:
           type: 'zip'
-          filename: '${{ env.PROG_NAME }}.${{ matrix.platform_sln }}.${{ env.Prog_Version }}.zip'
-          directory: 'release/${{ matrix.build_config }}'
+          filename: '${{ env.PROG_NAME }}.${{ env.Prog_Version }}.zip'
+          directory: 'src/AudioSwitcher/bin/${{ matrix.build_config }}'
           exclusions: '*.map *.pdb'
           recursive_exclusions: '*.map *.pdb changelog'
           path: '.'
@@ -93,8 +94,8 @@ jobs:
         continue-on-error: true
         uses: deep-soft/upload-artifact@v4
         with:
-          name: ${{ env.PROG_NAME }}.${{ matrix.platform_name }}.${{ env.Prog_Version }}.zip
-          #path: _build/vc/_output/product/${{ matrix.build_config }}.${{ matrix.platform_sln }}/${{ env.PROG_NAME }}.${{ matrix.build_config }}.${{ matrix.platform_sln }}.${{ env.Prog_Version }}.zip
+          #name: ${{ env.PROG_NAME }}.${{ matrix.platform_name }}.${{ env.Prog_Version }}.zip
+          name: ${{ env.PROG_NAME }}.${{ env.Prog_Version }}.zip
           path: ${{ env.ZIP_RELEASE_ARCHIVE }}
 
       - name: Publish
